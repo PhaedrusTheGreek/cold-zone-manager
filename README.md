@@ -4,6 +4,12 @@ When Expanding on the idea of Hot/Warm architecture by adding a cold zone, use t
 - Only indices matching the configured filterAttribute and filterValue are considered.
 - Only `maxOpenIndices` open at once
 
+## Installation for Kibana 5.6.0
+
+```
+bin/kibana-plugin install https://github.com/PhaedrusTheGreek/cold-zone-manager/releases/download/5.6.0/cold-zone-manager-5.6.0.zip
+```
+
 ## Config Options
 
 - `cold-zone-manager.enabled` 
