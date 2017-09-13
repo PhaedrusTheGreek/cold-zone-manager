@@ -125,7 +125,6 @@ uiModules
           return index.status;
     }
   }
-  
 
   $scope.$on('$destroy', function() {
       $interval.cancel(unsubscribe);
