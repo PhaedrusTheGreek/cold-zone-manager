@@ -12,7 +12,7 @@
               Try selecting indices that are either all open or all closed
           </div>     
           <div class="alert alert-info" ng-if="isSelectionAllClosed() && willOpeningSelectionExceedMax() && selectedItems.length > 0">
-              Opening selected indices will exceed maximum of {{ options.maxOpenIndices }} open indices in the cold zone.
+              Opening {{ selectedItems.length }} selected indices will exceed maximum of {{ options.maxOpenIndices }} open indices in the cold zone ({{ currentOpenIndices }} already open).
           </div>  
           <div class="alert alert-info" ng-if="selectedItems.length == 0 && indices.length > 0">
               No indices match your filter

@@ -44,7 +44,7 @@ uiModules
 
   $scope.selectedItems = [];
 
-  $scope.currentOpenIndices;
+  $scope.currentOpenIndices = 0;
 
 
   setIndices($route.current.locals.catIndices);
@@ -66,7 +66,7 @@ uiModules
 
   function setIndices(data) {
     $scope.indices = data;
-    $scope.currentOpenIndices = countStatus($scope.indices, 'open') == $scope.selectedItems.length
+    $scope.currentOpenIndices = countStatus($scope.indices, 'open');
   }
 
   function countStatus(indices, whatStatus){
@@ -110,7 +110,7 @@ uiModules
   }
   
   $scope.willOpeningSelectionExceedMax = function() {
-    return $scope.options.maxOpenIndices <= $scope.currentOpenIndices + $scope.selectedItems.length
+    return $scope.options.maxOpenIndices < $scope.currentOpenIndices + $scope.selectedItems.length
   }
 
   $scope.niceIndexStatus = function(index) {

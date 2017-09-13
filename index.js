@@ -31,7 +31,7 @@ export default function (kibana) {
         filterAttribute: Joi.string().default('index.routing.allocation.require.box_type'),        
         filterValue: Joi.string().default('cold'),        
         reloadMs: Joi.number().integer().default(0),        
-        maxOpenIndices: Joi.number().integer().default(10),        
+        maxOpenIndices: Joi.number().integer().default(2),        
       }).default();
     },
 
