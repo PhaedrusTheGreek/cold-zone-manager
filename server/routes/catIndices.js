@@ -48,14 +48,12 @@ export default function (server) {
     e.startedPercent = ( e.stateCount.STARTED +  e.stateCount.RELOCATING ) / e.totalShards;
   }
 
-
   async function catIndices(req) {
 
     const cluster = req.server.plugins.elasticsearch.getCluster('data');
     return await cluster.callWithRequest(req, 'cat.indices', { 'format': 'json' });
 
   }
-
 
   async function getClusterState(req) {
 
