@@ -6,8 +6,6 @@ When Expanding on the idea of Hot/Warm architecture by adding a cold zone, use t
 - Only indices matching the configured filterAttribute and filterValue are considered.
 - Only `maxOpenIndices` open at once
 
----
-
 ## Config Options
 
 - `cold-zone-manager.enabled` 
