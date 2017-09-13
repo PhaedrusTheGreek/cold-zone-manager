@@ -2,6 +2,8 @@
 
 > You know, for index Archives
 
+![screenshot](https://raw.githubusercontent.com/PhaedrusTheGreek/cold-zone-manager/master/ss.png)
+
 When Expanding on the idea of Hot/Warm architecture by adding a cold zone, use this UI to open/close indices.
 - Only indices matching the configured filterAttribute and filterValue are considered.
 - Only `maxOpenIndices` open at once
