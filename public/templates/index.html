@@ -1,0 +1,112 @@
+<div class="container" ng-controller="coldZoneManager">
+  <div class="row">
+    <div class="col-12-sm">
+
+      <div style="width:90%; padding-left: 50px;">
+        <h1>{{ title }}</h1>
+        <p class="lead">{{ description }}</p>
+        
+        <div style="height: 60px;">
+           
+          <div class="alert alert-info" ng-if="!isSelectionAllClosed() && !isSelectionAllOpen() && selectedItems.length > 0">
+              Try selecting indices that are either all open or all closed
+          </div>     
+          <div class="alert alert-info" ng-if="isSelectionAllClosed() && willOpeningSelectionExceedMax() && selectedItems.length > 0">
+              Opening selected indices will exceed maximum of {{ options.maxOpenIndices }} open indices in the cold zone.
+          </div>  
+          <div class="alert alert-info" ng-if="selectedItems.length == 0 && indices.length > 0">
+              No indices match your filter
+          </div>  
+          <div class="alert alert-info" ng-if="indices.length == 0">
+              No indices in the cold zone
+          </div>  
+
+        </div>
+
+        <form>
+          <div class="form-group">
+            <div class="input-group">
+              <table border=0 >
+                <tr>
+
+                  <td style="width:40px; background-color: #ecf0f1;" ><center><i class="fa fa-search"></i></center></td>
+                  <td style="width:300px" ><input type="text" class="form-control" placeholder="Filter to change selection" ng-model="searchFilter"></td>
+                  <td >
+                    <select style="width:75px; margin:0px 10px 0px 10px;"  class="form-control" ng-model="filterStatus">
+                      <option value="">Both</option>
+                      <option value="open">Open</option>
+                      <option value="close">Closed</option>
+                    </select>
+                  </td>
+                  
+                  <td>
+                  
+                    <div style="display:inline-block;" ng-if="isSelectionAllOpen() ">
+                      <button aria-label="Close Selected" ng-click="closeSelected()" type="button" class="kuiButton kuiButton--primary kuiButton--medium">
+                        Close Selected
+                      </button>   
+                    </div>     
+                    <div style="display:inline-block;" ng-if="isSelectionAllClosed() && !willOpeningSelectionExceedMax()">
+                      <button aria-label="Open Selected" ng-click="openSelected()" type="button" class="kuiButton kuiButton--primary kuiButton--medium">
+                        Open Selected
+                      </button>   
+                    </div>   
+                    <div style="display:inline-block;">    
+                      <button aria-label="Refresh" ng-click="reload()" type="button" class="kuiButton kuiButton--primary kuiButton--medium">
+                          <center><i class="fa fa-refresh"></i>
+                      </button>   
+                    </div>
+                  </td>
+
+                </tr>
+              </table>
+            </div>
+          </div>
+        </form>
+
+       
+
+        <table class="table table-bordered table-striped">
+          
+          <thead>
+            <tr>
+              <td>
+                <a style="text-decoration:none" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                  Index Name
+                </a>
+                  <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+              </td>
+              <td width=100>
+                <a style="text-decoration:none" ng-click="sortType = 'health'; sortReverse = !sortReverse">
+                  Health
+                </a>
+                <span ng-show="sortType == 'health' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'health' && sortReverse" class="fa fa-caret-up"></span>
+              </td>
+              <td>
+                <a style="text-decoration:none" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+                  Status
+                </a>
+                <span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+              </td>
+             
+            </tr>
+          </thead>
+          
+          <tbody>
+          <tr ng-repeat="index in (selectedItems = (indices | orderBy:sortType:sortReverse | filter:{index:searchFilter, status:filterStatus})) ">
+            <td> {{ index.index }} <progress ng-if="stateCount.INITIALIZING > 0" style="float:right; width:50px;" max="1" value="{{index.startedPercent}}"></progress></td>
+            <td width=100> {{ index.health.charAt(0).toUpperCase() + index.health.slice(1) }}</td>
+            <td width=100> {{ niceIndexStatus(index) }}</td>
+          </tr>
+          </tbody>
+          
+        </table>
+       
+
+      </div>
+    </div>
+  </div>
+</div>
