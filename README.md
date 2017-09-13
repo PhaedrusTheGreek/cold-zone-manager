@@ -8,7 +8,7 @@ When Expanding on the idea of Hot/Warm architecture by adding a cold zone, use t
 
 ---
 
-# Config Options
+## Config Options
 
 - `cold-zone-manager.enabled` 
 - `cold-zone-manager.filterAttribute` - the allocation awareness filter attribute (default=`index.routing.allocation.require.box_type`)
